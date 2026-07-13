@@ -1,0 +1,38 @@
+<div class="department-form">
+  <h2>{{ isEditMode ? 'Modifier le departement' : 'Nouveau departement' }}</h2>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <form (ngSubmit)="onSubmit()" #deptForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nom *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="department.name"
+        required
+        #nameField="ngModel"
+      />
+      <span class="field-error" *ngIf="nameField.invalid && nameField.touched">
+        Le nom est obligatoire.
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        [(ngModel)]="department.description"
+      ></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="deptForm.invalid">
+        Enregistrer
+      </button>
+      <button type="button" class="btn" (click)="onCancel()">Annuler</button>
+    </div>
+  </form>
+</div>

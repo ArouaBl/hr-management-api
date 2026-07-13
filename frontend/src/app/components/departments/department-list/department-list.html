@@ -1,0 +1,32 @@
+<div class="department-list">
+  <div class="header">
+    <h2>Departements</h2>
+    <a routerLink="/departments/new" class="btn btn-primary">+ Nouveau departement</a>
+  </div>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <table *ngIf="departments.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dept of departments">
+        <td>{{ dept.id }}</td>
+        <td>{{ dept.name }}</td>
+        <td>{{ dept.description }}</td>
+        <td>
+          <a [routerLink]="['/departments', dept.id, 'edit']" class="btn btn-small">Modifier</a>
+          <button (click)="deleteDepartment(dept.id)" class="btn btn-small btn-danger">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="departments.length === 0 && !errorMessage">Aucun departement pour le moment.</p>
+</div>
