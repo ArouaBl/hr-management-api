@@ -1,0 +1,60 @@
+<div class="dashboard">
+  <h2>Tableau de bord</h2>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div *ngIf="dashboard" class="dashboard-content">
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <span class="stat-value">{{ dashboard.totalEmployees }}</span>
+        <span class="stat-label">Employes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ dashboard.totalDepartments }}</span>
+        <span class="stat-label">Departements</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Employes par departement</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Departement</th>
+            <th>Nombre d'employes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dept of dashboard.employeesByDepartment">
+            <td>{{ dept.departmentName }}</td>
+            <td>{{ dept.employeeCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section two-columns">
+      <div>
+        <h3>Demandes de conge</h3>
+        <ul class="stat-list">
+          <li><span class="badge badge-pending">En attente</span> {{ dashboard.pendingLeaveRequests }}</li>
+          <li><span class="badge badge-approved">Validees</span> {{ dashboard.approvedLeaveRequests }}</li>
+          <li><span class="badge badge-rejected">Refusees</span> {{ dashboard.rejectedLeaveRequests }}</li>
+          <li>Validees ce mois-ci : {{ dashboard.leaveRequestsApprovedThisMonth }}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Autorisations d'absence</h3>
+        <ul class="stat-list">
+          <li><span class="badge badge-pending">En attente</span> {{ dashboard.pendingAbsenceRequests }}</li>
+          <li><span class="badge badge-approved">Validees</span> {{ dashboard.approvedAbsenceRequests }}</li>
+          <li><span class="badge badge-rejected">Refusees</span> {{ dashboard.rejectedAbsenceRequests }}</li>
+          <li>Validees ce mois-ci : {{ dashboard.absenceRequestsApprovedThisMonth }}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

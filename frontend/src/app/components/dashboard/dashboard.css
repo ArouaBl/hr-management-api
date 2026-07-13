@@ -1,0 +1,69 @@
+.dashboard {
+  padding: 1.5rem;
+}
+
+.stat-cards {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.stat-card {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.stat-label {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.two-columns {
+  display: flex;
+  gap: 3rem;
+}
+
+.stat-list {
+  list-style: none;
+  padding: 0;
+}
+
+.stat-list li {
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-approved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}

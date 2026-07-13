@@ -7,9 +7,12 @@ import { LeaveRequestList } from './components/leave-requests/leave-request-list
 import { LeaveRequestForm } from './components/leave-requests/leave-request-form/leave-request-form';
 import { AbsenceRequestList } from './components/absence-requests/absence-request-list/absence-request-list';
 import { AbsenceRequestForm } from './components/absence-requests/absence-request-form/absence-request-form';
+import { DashboardComponent } from './components/dashboard/dashboard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'departments', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+  { path: 'dashboard', component: DashboardComponent },
 
   { path: 'departments', component: DepartmentList },
   { path: 'departments/new', component: DepartmentForm },
