@@ -3,23 +3,24 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { LeaveRequest } from '../../../models/leave-request.model';
+import { AbsenceRequest } from '../../../models/absence-request.model';
 import { Employee } from '../../../models/employee.model';
-import { LeaveRequestService } from '../../../services/leave-request.service';
+import { AbsenceRequestService } from '../../../services/absence-request.service';
 import { EmployeeService } from '../../../services/employee.service';
 
 @Component({
-  selector: 'app-leave-request-form',
+  selector: 'app-absence-request-form',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './leave-request-form.html',
-  styleUrl: './leave-request-form.css'
+  templateUrl: './absence-request-form.html',
+  styleUrl: './absence-request-form.css'
 })
-export class LeaveRequestForm implements OnInit {
+export class AbsenceRequestForm implements OnInit {
 
-  request: LeaveRequest = {
-    startDate: '',
-    endDate: '',
+  request: AbsenceRequest = {
+    absenceDate: '',
+    startTime: '',
+    endTime: '',
     reason: '',
     employeeId: 0
   };
@@ -28,7 +29,7 @@ export class LeaveRequestForm implements OnInit {
   errorMessage = '';
 
   constructor(
-    private leaveRequestService: LeaveRequestService,
+    private absenceRequestService: AbsenceRequestService,
     private employeeService: EmployeeService,
     private router: Router
   ) {}
@@ -46,13 +47,13 @@ export class LeaveRequestForm implements OnInit {
   onSubmit(): void {
     this.errorMessage = '';
 
-    if (this.request.endDate < this.request.startDate) {
-      this.errorMessage = 'La date de fin ne peut pas etre avant la date de debut.';
+    if (this.request.endTime <= this.request.startTime) {
+      this.errorMessage = "L'heure de fin doit etre apres l'heure de debut.";
       return;
     }
 
-    this.leaveRequestService.create(this.request).subscribe({
-      next: () => this.router.navigate(['/leave-requests']),
+    this.absenceRequestService.create(this.request).subscribe({
+      next: () => this.router.navigate(['/absence-requests']),
       error: (err) => {
         console.error(err);
         this.errorMessage = err.error?.message || 'Une erreur est survenue.';
@@ -61,6 +62,6 @@ export class LeaveRequestForm implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/leave-requests']);
+    this.router.navigate(['/absence-requests']);
   }
 }

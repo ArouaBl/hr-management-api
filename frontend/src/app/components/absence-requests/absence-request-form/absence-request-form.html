@@ -1,0 +1,67 @@
+<div class="absence-request-form">
+  <h2>Nouvelle demande d'autorisation</h2>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <form (ngSubmit)="onSubmit()" #reqForm="ngForm">
+    <div class="form-group">
+      <label for="employeeId">Employe *</label>
+      <select
+        id="employeeId"
+        name="employeeId"
+        [(ngModel)]="request.employeeId"
+        required
+      >
+        <option [ngValue]="0" disabled>-- Choisir un employe --</option>
+        <option *ngFor="let emp of employees" [ngValue]="emp.id">
+          {{ emp.firstName }} {{ emp.lastName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="absenceDate">Date *</label>
+      <input
+        type="date"
+        id="absenceDate"
+        name="absenceDate"
+        [(ngModel)]="request.absenceDate"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="startTime">Heure de debut *</label>
+      <input
+        type="time"
+        id="startTime"
+        name="startTime"
+        [(ngModel)]="request.startTime"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="endTime">Heure de fin *</label>
+      <input
+        type="time"
+        id="endTime"
+        name="endTime"
+        [(ngModel)]="request.endTime"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="reason">Motif</label>
+      <textarea id="reason" name="reason" [(ngModel)]="request.reason"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="reqForm.invalid">
+        Envoyer la demande
+      </button>
+      <button type="button" class="btn" (click)="onCancel()">Annuler</button>
+    </div>
+  </form>
+</div>
