@@ -3,6 +3,8 @@ import { DepartmentList } from './components/departments/department-list/departm
 import { DepartmentForm } from './components/departments/department-form/department-form';
 import { EmployeeList } from './components/employees/employee-list/employee-list';
 import { EmployeeForm } from './components/employees/employee-form/employee-form';
+import { LeaveRequestList } from './components/leave-requests/leave-request-list/leave-request-list';
+import { LeaveRequestForm } from './components/leave-requests/leave-request-form/leave-request-form';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'departments', pathMatch: 'full' },
@@ -14,4 +16,7 @@ export const routes: Routes = [
   { path: 'employees', component: EmployeeList },
   { path: 'employees/new', component: EmployeeForm },
   { path: 'employees/:id/edit', component: EmployeeForm },
+
+  { path: 'leave-requests', component: LeaveRequestList },
+  { path: 'leave-requests/new', component: LeaveRequestForm },
 ];

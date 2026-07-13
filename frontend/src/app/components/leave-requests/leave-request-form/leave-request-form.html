@@ -1,0 +1,56 @@
+<div class="leave-request-form">
+  <h2>Nouvelle demande de conge</h2>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <form (ngSubmit)="onSubmit()" #reqForm="ngForm">
+    <div class="form-group">
+      <label for="employeeId">Employe *</label>
+      <select
+        id="employeeId"
+        name="employeeId"
+        [(ngModel)]="request.employeeId"
+        required
+      >
+        <option [ngValue]="0" disabled>-- Choisir un employe --</option>
+        <option *ngFor="let emp of employees" [ngValue]="emp.id">
+          {{ emp.firstName }} {{ emp.lastName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Date de debut *</label>
+      <input
+        type="date"
+        id="startDate"
+        name="startDate"
+        [(ngModel)]="request.startDate"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">Date de fin *</label>
+      <input
+        type="date"
+        id="endDate"
+        name="endDate"
+        [(ngModel)]="request.endDate"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="reason">Motif</label>
+      <textarea id="reason" name="reason" [(ngModel)]="request.reason"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="reqForm.invalid">
+        Envoyer la demande
+      </button>
+      <button type="button" class="btn" (click)="onCancel()">Annuler</button>
+    </div>
+  </form>
+</div>

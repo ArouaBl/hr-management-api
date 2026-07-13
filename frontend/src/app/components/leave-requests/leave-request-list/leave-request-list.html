@@ -1,0 +1,47 @@
+<div class="leave-request-list">
+  <div class="header">
+    <h2>Demandes de conge</h2>
+    <a routerLink="/leave-requests/new" class="btn btn-primary">+ Nouvelle demande</a>
+  </div>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <table *ngIf="requests.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Employe</th>
+        <th>Debut</th>
+        <th>Fin</th>
+        <th>Motif</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let req of requests">
+        <td>{{ req.id }}</td>
+        <td>{{ req.employeeName }}</td>
+        <td>{{ req.startDate }}</td>
+        <td>{{ req.endDate }}</td>
+        <td>{{ req.reason }}</td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'badge-pending': req.status === 'PENDING',
+            'badge-approved': req.status === 'APPROVED',
+            'badge-rejected': req.status === 'REJECTED'
+          }">{{ req.status }}</span>
+        </td>
+        <td class="actions">
+          <ng-container *ngIf="req.status === 'PENDING'">
+            <button (click)="approve(req.id)" class="btn btn-small btn-success">Valider</button>
+            <button (click)="reject(req.id)" class="btn btn-small btn-danger">Refuser</button>
+            <button (click)="deleteRequest(req.id)" class="btn btn-small">Annuler</button>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="requests.length === 0 && !errorMessage">Aucune demande de conge pour le moment.</p>
+</div>
