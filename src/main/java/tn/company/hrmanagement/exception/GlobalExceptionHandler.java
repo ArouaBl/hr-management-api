@@ -2,6 +2,7 @@ package tn.company.hrmanagement.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,10 +24,15 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
     }
 
-    // Nouveau : erreurs de regle metier (dates incoherentes, statut deja traite...)
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<Map<String, Object>> handleInvalidRequest(InvalidRequestException ex) {
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    // Nouveau : identifiants de connexion invalides -> 401 au lieu de 500
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Map<String, Object>> handleBadCredentials(BadCredentialsException ex) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
